@@ -100,10 +100,28 @@ $(document).ready(function(){
         }
       }
 
-      function getBotReply(userText) {
-        const index = Math.floor(Math.random() * botReplies.length);
-        return botReplies[index];
-      }
+      // function getBotReply(userText) {
+      //   const index = Math.floor(Math.random() * botReplies.length);
+      //   return botReplies[index];
+      // }
+
+    async function getBotReply(userText) {
+  const response = await fetch('http://localhost:3000/api/get-gpt-reply', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: userText })
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    console.error(error);
+    return 'Произошла ошибка.';
+  }
+
+  const data = await response.json();
+  return data.reply;
+}
+
 
       sendButton.addEventListener('click', () => {
         const text = chatInput.value.trim();
