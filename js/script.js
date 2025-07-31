@@ -106,7 +106,7 @@ $(document).ready(function(){
       // }
 
     async function getBotReply(userText) {
-  const response = await fetch('http://localhost:3000/api/get-gpt-reply', {
+  const response = await fetch('https://25ed3bf22718.ngrok-free.app/api/get-gpt-reply', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text: userText })
