@@ -1,0 +1,142 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"  />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Чат Бот</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png"  href="favicon.ico">
+    <link rel="icon" type="image/png"  href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+</head>
+<body>
+
+<!-- START SPRITE -->
+<svg style="display: none;">
+    <!-- 1) take-photo -->
+    <symbol id="icon-take-photo" viewBox="0 0 24 24">
+        <path d="M14.5 4H9.5L7 7H4C3.46957 7 2.96086 7.21071 2.58579 7.58579C2.21071 7.96086 2 8.46957 2 9V18C2 18.5304 2.21071 19.0391 2.58579 19.4142C2.96086 19.7893 3.46957 20 4 20H20C20.5304 20 21.0391 19.7893 21.4142 19.4142C21.7893 19.0391 22 18.5304 22 18V9C22 8.46957 21.7893 7.96086 21.4142 7.58579C21.0391 7.21071 20.5304 7 20 7H17L14.5 4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 16C13.6569 16 15 14.6569 15 13C15 11.3431 13.6569 10 12 10C10.3431 10 9 11.3431 9 13C9 14.6569 10.3431 16 12 16Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- 2) attache-photo -->
+    <symbol id="icon-attache-photo" viewBox="0 0 24 24">
+        <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 11C10.1046 11 11 10.1046 11 9C11 7.89543 10.1046 7 9 7C7.89543 7 7 7.89543 7 9C7 10.1046 7.89543 11 9 11Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M21 15L17.914 11.914C17.5389 11.5391 17.0303 11.3284 16.5 11.3284C15.9697 11.3284 15.4611 11.5391 15.086 11.914L6 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- 3) attache-file -->
+    <symbol id="icon-attache-file" viewBox="0 0 24 24">
+        <path d="M20 20C20.5304 20 21.0391 19.7893 21.4142 19.4142C21.7893 19.0391 22 18.5304 22 18V8C22 7.46957 21.7893 6.96086 21.4142 6.58579C21.0391 6.21071 20.5304 6 20 6H12.1C11.7655 6.00328 11.4355 5.92261 11.1403 5.76538C10.8451 5.60815 10.594 5.37938 10.41 5.1L9.6 3.9C9.41789 3.62347 9.16997 3.39648 8.8785 3.2394C8.58702 3.08231 8.26111 3.00005 7.93 3H4C3.46957 3 2.96086 3.21071 2.58579 3.58579C2.21071 3.96086 2 4.46957 2 5V18C2 18.5304 2.21071 19.0391 2.58579 19.4142C2.96086 19.7893 3.46957 20 4 20H20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 10H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- 4) take-audio -->
+    <symbol id="icon-take-audio" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2C11.2044 2 10.4413 2.31607 9.87868 2.87868C9.31607 3.44129 9 4.20435 9 5V12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12V5C15 4.20435 14.6839 3.44129 14.1213 2.87868C13.5587 2.31607 12.7956 2 12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M19 10V12C19 13.8565 18.2625 15.637 16.9497 16.9497C15.637 18.2625 13.8565 19 12 19C10.1435 19 8.36301 18.2625 7.05025 16.9497C5.7375 15.637 5 13.8565 5 12V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 19V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- 5) take-video -->
+    <symbol id="icon-take-video" viewBox="0 0 20 20">
+        <g clip-path="url(#clip0)">
+            <path d="M10.0001 18.3334C14.6025 18.3334 18.3334 14.6024 18.3334 10C18.3334 5.39765 14.6025 1.66669 10.0001 1.66669C5.39771 1.66669 1.66675 5.39765 1.66675 10C1.66675 14.6024 5.39771 18.3334 10.0001 18.3334Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M11.6667 7.5H8.33333C7.8731 7.5 7.5 7.8731 7.5 8.33333V11.6667C7.5 12.1269 7.8731 12.5 8.33333 12.5H11.6667C12.1269 12.5 12.5 12.1269 12.5 11.6667V8.33333C12.5 7.8731 12.1269 7.5 11.6667 7.5Z" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <defs>
+            <clipPath id="clip0">
+                <rect width="20" height="20" fill="white"/>
+            </clipPath>
+        </defs>
+    </symbol>
+
+    <!-- 6) send -->
+    <symbol id="icon-send" viewBox="0 0 24 24">
+        <path d="M22 12L3 20L6.563 12L3 4L22 12ZM22 12H6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+</svg>
+<!-- END SPRITE -->
+
+    <main id="main">
+        <div class="container">
+            <div class="inner">
+                <div class="content">
+                    <div id="cz1526" class="csc-default">
+                        <div class="ce-bodytext">
+                            <div id="popup" class="popup">
+                                <div class="popup__content">
+                                    <div class="popup__frame">
+                                        <div class="popup__hello">
+                                            <div class="popup__hello-block">
+                                                <div class="popup__robot-layers">
+                                                    <img class="popup__vector popup__vector--2" src="icons/Vector2.svg" alt="Vector 2">
+                                                    <img class="popup__vector popup__vector--1" src="icons/Vector1.svg" alt="Vector 1">
+                                                    <img class="popup__robot" src="icons/robot.svg" alt="Robot">
+                                                </div>
+                                                <h2 class="popup__hello-title fade-in">Привет!</h2>
+                                                <h2 class="popup__hello-subtitle fade-in">Я - Данечка, твой <br> виртуальный помощник</h2>
+                                            </div>
+                                        </div>
+                                        <div class="popup__chat">
+                                            <div class="popup__chat-content" id="chatContent">
+                                                <div class="popup__chat-bot-avatar">
+                                                    <img class="popup__chat-bot-icon" src="icons/robot.svg" alt="Robot" />
+                                                </div>
+                                                <div class="popup__chat-message bot">Чем могу помочь?</div>
+                                            </div>
+                                            <div class="popup__chat-controls">
+                                                <div class="popup__chat-controls-left">
+                                                    <button class="popup__chat-button popup__chat-button--photo" aria-label="Сделать фото">
+                                                        <svg class="popup__chat-icon"><use href="#icon-take-photo"/></svg>
+                                                    </button>
+                                                    <button class="popup__chat-button popup__chat-button--attach-photo" aria-label="Прикрепить фото">
+                                                        <svg class="popup__chat-icon"><use href="#icon-attache-photo"/></svg>
+                                                    </button>
+                                                    <button class="popup__chat-button popup__chat-button--attach-file" aria-label="Прикрепить файл">
+                                                        <svg class="popup__chat-icon"><use href="#icon-attache-file"/></svg>
+                                                    </button>
+                                                </div>
+                                                <div class="popup__chat-controls-center">
+                                                    <input id="chatInput" class="popup__chat-input" type="text" placeholder="Введите сообщение..." />
+                                                </div>
+                                                <div class="popup__chat-controls-right">
+                                                    <button class="popup__chat-button popup__chat-button--audio" aria-label="Записать аудио">
+                                                        <svg class="popup__chat-icon"><use href="#icon-take-audio"/></svg>
+                                                    </button>
+                                                    <button class="popup__chat-button popup__chat-button--video" aria-label="Записать видео">
+                                                        <svg class="popup__chat-icon"><use href="#icon-take-video"/></svg>
+                                                    </button>
+                                                    <button id="sendButton"class="popup__chat-button popup__chat-button--send" aria-label="Отправить сообщение">
+                                                        <svg class="popup__chat-icon"><use href="#icon-send"/></svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="popup__close">
+                                        <img class="popup__close-icon" alt="" src="icons/close.svg">
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="ce-media">
+                                <a href="/mibew/chat?locale=ru"
+                                id="mibew-agent-button"
+                                onclick="Mibew.Objects.ChatPopups['574233896865e88d'].open();return false;"
+                                rel="noopener">
+                                <img alt="" src="icons/button-main.gif">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
