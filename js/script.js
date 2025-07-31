@@ -123,20 +123,35 @@ $(document).ready(function(){
 }
 
 
-      sendButton.addEventListener('click', () => {
-        const text = chatInput.value.trim();
-        if (!text) return;
+      // sendButton.addEventListener('click', () => {
+      //   const text = chatInput.value.trim();
+      //   if (!text) return;
 
-        renderMessage('user', text);
-        chatInput.value = '';
-        const typing = showTypingIndicator('bot');
+      //   renderMessage('user', text);
+      //   chatInput.value = '';
+      //   const typing = showTypingIndicator('bot');
 
-        const botReply = getBotReply(text);
-        setTimeout(() => {
-            removeTypingIndicator(typing);
-          renderMessage('bot', botReply);
-        }, 1500);
-      });
+      //   const botReply = getBotReply(text);
+      //   setTimeout(() => {
+      //       removeTypingIndicator(typing);
+      //     renderMessage('bot', botReply);
+      //   }, 1500);
+      // });
+
+    sendButton.addEventListener('click', async () => {
+  const text = chatInput.value.trim();
+  if (!text) return;
+
+  renderMessage('user', text);
+  chatInput.value = '';
+  const typing = showTypingIndicator('bot');
+
+  const botReply = await getBotReply(text); // ← Дождись ответа сервера!
+  
+  removeTypingIndicator(typing);
+  renderMessage('bot', botReply);
+});
+
 
     chatInput.addEventListener('keydown', e => {
       if (e.key === 'Enter') {
