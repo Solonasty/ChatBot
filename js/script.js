@@ -106,7 +106,7 @@ $(document).ready(function(){
       // }
 
     async function getBotReply(userText) {
-  const response = await fetch('https://25ed3bf22718.ngrok-free.app/api/get-gpt-reply', {
+  const response = await fetch('https://bb7ec25b8dfe.ngrok-free.app/api/get-gpt-reply', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text: userText })
@@ -121,6 +121,21 @@ $(document).ready(function(){
   const data = await response.json();
   return data.reply;
 }
+
+sendButton.addEventListener('click', async () => {
+  const text = chatInput.value.trim();
+  if (!text) return;
+
+  renderMessage('user', text);
+  chatInput.value = '';
+  const typing = showTypingIndicator('bot');
+
+  const botReply = await getBotReply(text);
+
+  removeTypingIndicator(typing);
+  renderMessage('bot', botReply);
+});
+
 
 
       // sendButton.addEventListener('click', () => {
@@ -138,19 +153,19 @@ $(document).ready(function(){
       //   }, 1500);
       // });
 
-    sendButton.addEventListener('click', async () => {
-  const text = chatInput.value.trim();
-  if (!text) return;
+//     sendButton.addEventListener('click', async () => {
+//   const text = chatInput.value.trim();
+//   if (!text) return;
 
-  renderMessage('user', text);
-  chatInput.value = '';
-  const typing = showTypingIndicator('bot');
+//   renderMessage('user', text);
+//   chatInput.value = '';
+//   const typing = showTypingIndicator('bot');
 
-  const botReply = await getBotReply(text); // ← Дождись ответа сервера!
+//   const botReply = await getBotReply(text); // ← Дождись ответа сервера!
   
-  removeTypingIndicator(typing);
-  renderMessage('bot', botReply);
-});
+//   removeTypingIndicator(typing);
+//   renderMessage('bot', botReply);
+// });
 
 
     chatInput.addEventListener('keydown', e => {
